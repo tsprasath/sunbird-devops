@@ -97,7 +97,7 @@ alertmanager:
 
   ## Api that prometheus will use to communicate with alertmanager. Possible values are v1, v2
   ##
-  apiVersion: v2
+  apiVersion: v1
 
   ## Service account for Alertmanager to use.
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
