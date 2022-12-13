@@ -16,6 +16,9 @@
   - debug:
       var: keycloak_access_token
 
+sunbird_custodian_org_id: "0136855050200760320"
+
+
 # - name: Creating root org
 #   block:
 #   - uri:
