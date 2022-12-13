@@ -28,8 +28,8 @@
       body: |-
         {
           "request": {
-            "orgName": "Sunbird",
-            "channel": "{{ sunbird_default_channel }}",
+            "orgName": "Uphrh",
+            "channel": "uphrh",
             "description": "Default Channel",
             "isTenant": true,
             "organisationType":"board"
