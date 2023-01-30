@@ -28,7 +28,7 @@
       body: |-
         {
           "request": {
-            "orgName": "Sunbird",
+            "orgName": "Niramaya",
             "channel": "{{ sunbird_default_channel }}",
             "description": "Default Channel",
             "isTenant": true,
