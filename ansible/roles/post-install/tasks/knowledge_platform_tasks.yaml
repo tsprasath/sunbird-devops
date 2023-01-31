@@ -60,7 +60,7 @@
     url: http://localhost:8080/learning-service/framework/v3/create
     method: POST
     headers:
-      X-Channel-Id: "{{ sunbird_custodian_org_id }}"
+      X-Channel-Id: "0137229074717982720"
     body_format: json
     body: |-
       {
@@ -69,7 +69,7 @@
                 "name": "{{ default_framework }}",
                 "description": "{{ default_framework }} Framework",
                 "code": "{{ default_framework }}",
-                "channels": [{"identifier": "{{ sunbird_custodian_org_id }}"}]
+                "channels": [{"identifier": "0137229074717982720"}]
               }
           }
       }
@@ -81,7 +81,7 @@
     method: POST
     body_format: json
     headers:
-      X-Channel-Id: "{{ sunbird_custodian_org_id }}"
+      X-Channel-Id: "0137229074717982720"
     body: |-
       {
           "request": {
@@ -97,7 +97,7 @@
     method: POST
     body_format: json
     headers:
-      X-Channel-Id: "{{ sunbird_custodian_org_id }}"
+      X-Channel-Id: "0137229074717982720"
     body: |-
       {
           "request": {
@@ -113,14 +113,14 @@
     method: POST
     body_format: json
     headers:
-      X-Channel-Id: "{{ sunbird_custodian_org_id }}"
+      X-Channel-Id: "0137229074717982720"
     body: |-
       {}
   delegate_to: "{{ learningservice_ip }}"
 
 - name: Assosiating framework with channel
   uri:
-    url: "https://{{ domain_name }}/api/channel/v1/update/{{ sunbird_custodian_org_id }}"
+    url: "https://{{ domain_name }}/api/channel/v1/update/0137229074717982720"
     method: PATCH
     body_format: json
     headers:
@@ -145,7 +145,7 @@
       method: POST
       body_format: json
       headers:
-        X-Channel-Id: "{{ sunbird_custodian_org_id }}"
+        X-Channel-Id: "0137229074717982720"
       body: |-
         {
           "request": {
