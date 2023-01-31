@@ -1630,7 +1630,7 @@ framework_terms:
     term: { "name": "Class 1", "code": "class1" }
 
 custodian_org_data:
-  - { "id": "custodianOrgId", "field": "custodianOrgId", "value": "{{ sunbird_custodian_org_id }}" }
+  - { "id": "custodianOrgId", "field": "custodianOrgId", "value": "0137229074717982720" }
   - { "id": "custodianOrgChannel", "field": "custodianOrgChannel", "value": "{{ sunbird_default_channel }}" }
   - { "id": "{{ sunbird_default_channel }}", "field": "{{ sunbird_default_channel }}", "value": "https://{{ domain_name }}/faq" }
 
