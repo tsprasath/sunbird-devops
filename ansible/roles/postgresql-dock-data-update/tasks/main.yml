@@ -9,7 +9,6 @@
     name: python3-psycopg2
     state: present
   when: ansible_distribution_version | float > 20
-  ignore_errors: true
 
 - name: Verifying db users are present else creating them
   include: databases.yml
