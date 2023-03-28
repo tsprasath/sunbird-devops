@@ -1,7 +1,7 @@
 - hosts: localhost
-  gather_facts: no
+  gather_facts: yes
   become: yes
   vars_files:
     - ['{{inventory_dir}}/secrets.yml', 'secrets/{{env}}.yml']
   roles:
-    - postgresql-dock-data-update 
+    - postgresql-dock-data-update
