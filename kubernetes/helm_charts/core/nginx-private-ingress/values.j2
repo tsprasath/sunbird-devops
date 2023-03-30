@@ -7,6 +7,22 @@ replicaCount: {{nginx_private_ingress_replicacount|default(1)}}
 nginx_private_ingress_type: {{ nginx_private_ingress_type | default('LoadBalancer') }}
 private_ingress_custom_annotations: {{ private_ingress_custom_annotations | d('false') | lower }}
 kube_dns_ip: {{kube_dns_ip}}
+# the following item is in standard Sunbird
+nginx_worker_processes: {{ nginx_worker_processes | d("auto")}}
+# end of standard Sunbird Item
+
+# Grafana access htpasswd
+# You can generate one at
+# https://wtools.io/generate-htpasswd-online
+#    if grafana is required uncomment next line
+# grafana_htpasswd: {{ grafana_nginx_private_htpasswd | default("") }}
+
+# different CSP will requires to use either
+#   nginx_private_ingress_annotations
+# or
+#   private_ingress_annotation:
+#
+# let's handle nginx_private_ingress_annotationsfirst
 
 {% if nginx_private_ingress_annotations is defined and nginx_private_ingress_annotations %}
 # you can define annotations in ansible for custom behaviour
@@ -17,11 +33,17 @@ kube_dns_ip: {{kube_dns_ip}}
 annotations: {{nginx_private_ingress_annotations|to_json}}
 {% endif %}
 
-private_ingress_annotation:
-  cloud_provider: 'service.beta.kubernetes.io/azure-load-balancer-internal: "true"'
+# then we handle private_ingress_annotation
+
 {% if private_ingressgateway_ip is defined and private_ingressgateway_ip %}
 nginx_private_ingress_ip: {{ private_ingressgateway_ip }}
 {% endif %}
+
+# the below section should be handled by nginx_private_ingress_annotations
+#   comment out here
+# private_ingress_annotation:
+#  cloud_provider: 'service.beta.kubernetes.io/azure-load-balancer-internal: "true"'
+
 resources:
   requests:
     cpu: {{nginx_private_ingress_cpu_req | default('100m')}}
@@ -29,3 +51,6 @@ resources:
   limits:
     cpu: {{nginx_private_ingress_cpu_limit | default('500m')}}
     memory: {{nginx_private_ingress_mem_limit | default('500Mi')}}
+
+# add csp here
+csp: {{cloud_service_provider}}

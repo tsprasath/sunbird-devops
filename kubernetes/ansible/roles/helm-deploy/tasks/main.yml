@@ -1,5 +1,5 @@
 # This variable will get injected to nginx resolver config
-# There is no native helm way to do this. So it's 
+# There is no native helm way to do this. So it's
 # kind of a workaround
 - name: getting kube dns ip
   shell: kubectl get service --namespace kube-system kube-dns -o jsonpath="{.spec.clusterIP}"
@@ -56,7 +56,7 @@
   ignore_errors: yes
 
 - name: Get deployed image name - deployments
-  shell: "kubectl get deployments {{ release_name }} -o json -n {{ namespace }} | jq '.spec.template.spec.containers | .[].image' -r | awk -F/ '{print $2}'"
+  shell: kubectl get deployments.apps {{ release_name }} -o json -n {{ namespace }} | jq -r '.spec.template.spec.containers[0].image | split("/")[-1]'
   register: image
 
 - set_fact:
@@ -70,8 +70,8 @@
   ignore_errors: yes
 
 - name: Get deployed image name - daemonsets
-  shell: "kubectl get daemonsets {{ release_name }} -o json -n {{ namespace }} | jq '.spec.template.spec.containers | .[].image' -r | awk -F/ '{print $2}'"
-  register: image 
+  shell: kubectl get daemonsets {{ release_name }} -o json -n {{ namespace }} | jq -r '.spec.template.spec.containers[].image | split("/")[-1]'
+  register: image
 
 - set_fact:
    deployed_image: "{{ image if image.stdout_lines | length > 0 else deployed_image }}"
@@ -84,7 +84,7 @@
   ignore_errors: yes
 
 - name: Get deployed image name - statefulsets
-  shell: "kubectl get statefulsets {{ release_name }} -o json -n {{ namespace }} | jq '.spec.template.spec.containers | .[].image' -r | awk -F/ '{print $2}'"
+  shell: kubectl get statefulsets {{ release_name }} -o json -n {{ namespace }} | jq -r '.spec.template.spec.containers[].image | split("/")[-1]'
   register: image
 
 - set_fact:
@@ -98,7 +98,7 @@
 - set_fact:
    metadata_image: "{{ image_name }}:{{ image_tag }}"
 
-- debug: 
+- debug:
     msg: "deployed image: {{ deployed_image.stdout }}"
 
 - name: Compare deployed image and metadata_image
