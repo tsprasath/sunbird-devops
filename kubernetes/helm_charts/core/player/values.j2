@@ -5,7 +5,7 @@ imagepullsecrets: {{ imagepullsecrets }}
 dockerhub: {{ dockerhub }}
 
 replicaCount: {{player_replicacount|default(1)}}
-repository: {{player_repository|default('player')}}
+repository: {{player_repository|default('creation-player')}}
 image_tag: {{ image_tag }}
 resources:
   requests:
