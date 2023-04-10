@@ -17,6 +17,7 @@
       docker_image:
         name: "{{ hub_org }}/{{ image_name }}:{{ image_tag }}"
         push: yes
+        source: local
    
     - file:
         path: "/root/.docker"
