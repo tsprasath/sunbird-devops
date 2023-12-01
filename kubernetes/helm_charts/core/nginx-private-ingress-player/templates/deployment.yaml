@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-private-ingress
+  name: nginx-private-ingress-player
   namespace: {{ .Values.namespace }}
   annotations:
     reloader.stakater.com/auto: "true"
@@ -9,11 +9,11 @@ spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: nginx-private-ingress
+      app: nginx-private-ingress-player
   template:
     metadata:
       labels:
-        app: nginx-private-ingress
+        app: nginx-private-ingress-player
     spec:
 {{- if .Values.imagepullsecrets }}
       imagePullSecrets:
@@ -46,7 +46,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-private-ingress
+  name: nginx-private-ingress-player
   namespace: {{ .Values.namespace }}
   annotations:
 {{ toYaml .Values.annotations | indent 4 }}
@@ -61,4 +61,4 @@ spec:
     targetPort: 80
     name: http
   selector:
-    app: nginx-private-ingress
+    app: nginx-private-ingress-player
