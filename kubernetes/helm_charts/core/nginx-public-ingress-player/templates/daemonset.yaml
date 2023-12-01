@@ -28,6 +28,7 @@ spec:
       volumes:
         - name: tls
           secret:
+            defaultMode: 420
             secretName: ingress-cert
         - name: proxy-config
           configMap:
