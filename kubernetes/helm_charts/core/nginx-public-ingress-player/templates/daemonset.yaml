@@ -2,12 +2,12 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: nginx-public-ingress-player
+  name: nginx-public-ingress
   namespace: {{ .Values.namespace }}
 spec:
   selector:
     matchLabels:
-      app: nginx-public-ingress-player
+      app: nginx-public-ingress
   updateStrategy:
     type: RollingUpdate
     rollingUpdate:
@@ -18,7 +18,7 @@ spec:
         nginxRolloutID: {{ randAlphaNum 5 | quote }} # Restart nginx after every deployment
         fluentbit.io/parser: nginx2
       labels:
-        app: nginx-public-ingress-player
+        app: nginx-public-ingress
     spec:
       # Running nginx with custom config
 {{- if .Values.imagepullsecrets }}
@@ -75,13 +75,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-public-ingress-metrics-player
+  name: nginx-public-ingress-metrics
   namespace: {{ .Values.namespace }}
   labels:
 {{- include "nginx-public-ingress.labels" . | nindent 4 }}
 spec:
   selector:
-    app: nginx-public-ingress-player
+    app: nginx-public-ingress
   ports:
     - name: http
       port: 9145
@@ -91,7 +91,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-public-ingress-player
+  name: nginx-public-ingress
   namespace: {{ .Values.namespace }}
 {{- if .Values.service.annotations }}
   annotations:
@@ -100,7 +100,7 @@ metadata:
 spec:
   externalTrafficPolicy: Local
   selector:
-    app: nginx-public-ingress-player
+    app: nginx-public-ingress
   type: {{ .Values.service.type }}
 {{- if and .Values.service.nginx_public_ingress_ip (ne .Values.service.type "NodePort") }}
   loadBalancerIP: {{ .Values.service.nginx_public_ingress_ip }}
