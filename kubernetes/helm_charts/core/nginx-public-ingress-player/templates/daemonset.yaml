@@ -78,7 +78,7 @@ metadata:
   name: nginx-public-ingress-metrics-player
   namespace: {{ .Values.namespace }}
   labels:
-{{- include "nginx-public-ingress-player.labels" . | nindent 4 }}
+{{- include "nginx-public-ingress.labels" . | nindent 4 }}
 spec:
   selector:
     app: nginx-public-ingress-player
