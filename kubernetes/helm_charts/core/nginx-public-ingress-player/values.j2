@@ -12,11 +12,11 @@ service:
   - port: 80
     name: http
     targetPort: 80
-    nodePort: 31386
+    nodePort: 31387
   - port: 443
     name: https
     targetPort: 443
-    nodePort: 31396
+    nodePort: 31397
 
 {% if nginx_volumes is defined and nginx_volumes %}
 {#
